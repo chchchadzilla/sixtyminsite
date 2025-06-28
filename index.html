@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>60-Min Websites. OR IT'S F***ING FREE.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: #0a0a12;
+            color: #e0e0ff;
+            overflow-x: hidden;
+        }
+        
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .cyber-gradient {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+        }
+        
+        .cyber-border {
+            position: relative;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            border-image: linear-gradient(45deg, #00f2ff, #ff00e4) 1;
+        }
+        
+        .cyber-glow {
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+        }
+        
+        .cyber-glow-red {
+            box-shadow: 0 0 15px rgba(255, 0, 100, 0.7);
+        }
+        
+        .cyber-glow-purple {
+            box-shadow: 0 0 15px rgba(180, 0, 255, 0.7);
+        }
+        
+        .cyber-pulse {
+            animation: cyber-pulse 2s infinite;
+        }
+        
+        @keyframes cyber-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 242, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0); }
+        }
+        
+        .tech-icon {
+            transition: all 0.3s ease;
+            filter: grayscale(100%) brightness(0.8);
+        }
+        
+        .tech-icon:hover {
+            filter: grayscale(0%) brightness(1.2);
+            transform: scale(1.2);
+        }
+        
+        .hexagon {
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+        
+        .custom-cursor {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(0, 242, 255, 0.5);
+            position: fixed;
+            pointer-events: none;
+            mix-blend-mode: screen;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px) rotate(2deg) perspective(1000px) rotateX(var(--mouse-y)) rotateY(var(--mouse-x));
+        }
+        
+        .btn-fill {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-fill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,242,255,0.3) 0%, rgba(255,0,228,0.3) 100%);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+        
+        .btn-fill:hover::before {
+            width: 100%;
+        }
+        
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(0, 242, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(0, 242, 255, 0.05) 50%,
+                transparent 100%
+            );
+            background-size: 100% 8px;
+            pointer-events: none;
+            z-index: 999;
+            animation: scanline 8s linear infinite;
+        }
+        
+        @keyframes scanline {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+        
+        .glitch {
+            position: relative;
+        }
+        
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        
+        .glitch::before {
+            color: #0ff;
+            z-index: -1;
+            animation: glitch-effect 3s infinite;
+        }
+        
+        .glitch::after {
+            color: #f0f;
+            z-index: -2;
+            animation: glitch-effect 2s infinite reverse;
+        }
+        
+        @keyframes glitch-effect {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); }
+        }
+        
+        .hex-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at center, transparent 0%, #0a0a12 100%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M50,0 L100,25 L100,75 L50,100 L0,75 L0,25 Z" fill="none" stroke="rgba(0,242,255,0.1)" stroke-width="0.5"/></svg>');
+            background-size: 100px 100px;
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        #click-effects {
+            z-index: -1;
+        }
+        
+        #threejs-bg {
+            mix-blend-mode: screen;
+        }
+    </style>
+</head>
+<body class="relative">
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    
+    <!-- Scanline effect -->
+    <div class="scanline"></div>
+    
+    <!-- Hex grid background -->
+    <div class="hex-grid"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-black/80 backdrop-blur-md z-50 border-b border-cyan-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-cyan-400 font-orbitron tracking-wider">SIXTY<span class="text-pink-500">MIN</span>.SITE</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-gray-300 hover:text-cyan-400 transition-all duration-300 relative group nav-link">
+                        <span class="font-medium">ABOUT</span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#offer" class="text-gray-300 hover:text-cyan-400 transition-all duration-300 relative group nav-link">
+                        <span class="font-medium">THE OFFER</span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#tech" class="text-gray-300 hover:text-cyan-400 transition-all duration-300 relative group nav-link">
+                        <span class="font-medium">TECH</span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#process" class="text-gray-300 hover:text-cyan-400 transition-all duration-300 relative group nav-link">
+                        <span class="font-medium">PROCESS</span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#contact" class="bg-gradient-to-r from-cyan-500 to-pink-500 text-black px-6 py-2 rounded-full hover:opacity-90 transition font-bold font-orbitron tracking-wider cyber-glow">GET YOURS</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" class="text-gray-300 hover:text-cyan-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black/90 backdrop-blur-md pb-4 px-4 border-t border-cyan-500/20">
+            <a href="#about" class="block py-3 text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium nav-link border-b border-gray-800">ABOUT</a>
+            <a href="#offer" class="block py-3 text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium nav-link border-b border-gray-800">THE OFFER</a>
+            <a href="#tech" class="block py-3 text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium nav-link border-b border-gray-800">TECH</a>
+            <a href="#process" class="block py-3 text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium nav-link border-b border-gray-800">PROCESS</a>
+            <a href="#contact" class="block bg-gradient-to-r from-cyan-500 to-pink-500 text-black px-6 py-2 rounded-full hover:opacity-90 w-max mt-4 font-bold font-orbitron tracking-wider cyber-glow">GET YOURS</a>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 grid-pattern"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80 z-0"></div>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-8xl font-bold mb-6 leading-tight font-orbitron tracking-tighter relative z-10">
+                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500 glitch" data-text="YOUR NEW WEBSITE">YOUR NEW WEBSITE</span>
+                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-cyan-400 mt-4 glitch" data-text="IN SIXTY MIN">IN SIXTY MIN</span>
+                    <span class="block text-blu-400 mt-8 text-4xl md:text-6xl glitch" data-text="OR IT'S F*CKING FREE" style="margin-top: 2rem;">OR IT'S <span class="text-red-500">F*CKING FREE</span></span>
+                </h1>
+                <br><br>
+                <div class="relative max-w-5xl mx-auto mt-12" style="z-index: 10;">
+                    <!-- Floating tech badges -->
+                    <div class="absolute -top-20 left-0 right-0 flex justify-center gap-6" style="z-index: 5;">
+                        <div class="bg-black/80 backdrop-blur-sm px-4 py-2 rounded-full border border-cyan-400/30 text-sm font-bold text-cyan-400 animate-float cyber-glow" style="animation-delay: 0s">CUSTOM CODED</div>
+                        <div class="bg-black/80 backdrop-blur-sm px-4 py-2 rounded-full border border-pink-500/30 text-sm font-bold text-pink-500 animate-float cyber-glow-purple" style="animation-delay: 1s">NO TEMPLATES</div>
+                        <div class="bg-black/80 backdrop-blur-sm px-4 py-2 rounded-full border border-cyan-400/30 text-sm font-bold text-cyan-400 animate-float cyber-glow" style="animation-delay: 2s">ULTRA MODERN</div>
+                    </div>
+                    <!-- Main content block -->
+                    <div class="bg-black/50 backdrop-blur-md p-0 rounded-xl border border-cyan-500/20 shadow-xl relative z-10 cyber-glow">
+                        <div class="text-center space-y-6">
+                            <!-- Animated heading -->
+                            <h3 class="text-3xl md:text-4xl font-bold text-white font-orbitron">
+                                <span class="block">BREAKNECK WEB TYPE SH*T</span>
+                                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500 mt-4 animate-pulse">DELIVERED AT WARP SPEED</span>
+                            </h3>
+                            
+                            <div id="radio-text" class="relative h-20 -mt-6 overflow-visible" style="z-index: 1;">
+                                <div class="absolute whitespace-nowrap text-2xl font-bold text-pink-500" style="font-family: 'Orbitron', sans-serif; left: -1000px; top: 20%; transform: translateY(-5%); z-index: -1;" id="gigachad-text">BY GIGACHADZILLA</div>
+                            </div>
+                            <!-- Description with animated underline -->
+                            <p class="text-3xl text-gray-300 relative inline-block group">
+                                Digital presence that <strong>slaps</strong>
+                                <span class="absolute bottom-0.5 left-0.5 h-0.5 bg-gradient-to-r from-cyan-400 to-pink-500 w-0 group-hover:w-full transition-all duration-500"></span>
+                            </p>
+                            
+                            <!-- Guarantee badge -->
+                            <div class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-600 to-pink-600 text-white px-4 py-2 rounded-full font-orbitron tracking-wider animate-bounce cyber-glow">
+                                <i class="fas fa-bolt"></i>
+                                <span class="font-bold">1 HR GUARANTEE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <style>
+                    @keyframes gigachad-entry {
+                        0% { left: -1000px; }
+                        30% { left: 50%; transform: translate(-50%, -50%); }
+                        40% { left: 60%; transform: translate(-60%, -50%); }
+                        50% { left: 50%; transform: translate(-50%, -50%); }
+                        60% { left: 40%; transform: translate(-40%, -50%); }
+                        70% { left: 50%; transform: translate(-50%, -50%); }
+                        80% { left: 50%; transform: translate(-50%, -50%); }
+                        100% { left: calc(100% + 500px); transform: translate(0, -50%); }
+                    }
+                    #gigachad-text {
+                        animation: gigachad-entry 5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+                        text-shadow: 0 0 10px rgba(180, 0, 255, 0.5);
+                        z-index: -1;
+                    }
+                    
+                    @keyframes float {
+                        0%, 100% { transform: translateY(0); opacity: 0.8; }
+                        25% { transform: translateY(-15px); opacity: 1; }
+                        50% { transform: translateY(0); opacity: 0.8; }
+                        75% { transform: translateY(-10px); opacity: 0.9; }
+                    }
+                    .animate-float {
+                        animation: float 3s ease-in-out infinite;
+                    }
+                </style>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-4 mt-16">
+                    <a href="#contact" class="relative bg-gradient-to-r from-cyan-500 to-pink-500 text-black font-bold py-3 px-8 rounded-full text-lg transition btn-fill overflow-hidden font-orbitron tracking-wider cyber-glow">CLAIM YOUR SPOT</a>
+                    <a href="#offer" class="relative bg-black text-white border border-cyan-500/50 hover:border-cyan-500 font-bold py-3 px-8 rounded-full text-lg transition btn-fill overflow-hidden font-orbitron tracking-wider">TELL ME MORE</a>
+                </div>
+            </div>
+            
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="bg-black/50 backdrop-blur-md p-6 rounded-xl border border-cyan-500/20 shadow-md card-hover cyber-glow">
+                    <div class="text-cyan-400 text-4xl mb-3 font-orbitron">60</div>
+                    <h3 class="font-bold text-lg">MINUTES</h3>
+                    <p class="text-gray-400">Guaranteed delivery</p>
+                </div>
+                <div class="bg-black/50 backdrop-blur-md p-6 rounded-xl border border-pink-500/20 shadow-md card-hover cyber-glow-purple">
+                    <div class="text-pink-500 text-4xl mb-3 font-orbitron">30</div>
+                    <h3 class="font-bold text-lg">LOGOS</h3>
+                    <p class="text-gray-400">Free with your site</p>
+                </div>
+                <div class="bg-black/50 backdrop-blur-md p-6 rounded-xl border border-cyan-500/20 shadow-md card-hover cyber-glow">
+                    <div class="text-cyan-400 text-4xl mb-3 font-orbitron">500</div>
+                    <h3 class="font-bold text-lg">DOLLARS</h3>
+                    <p class="text-gray-400">Friends & family price</p>
+                </div>
+                <div class="bg-black/50 backdrop-blur-md p-6 rounded-xl border border-pink-500/20 shadow-md card-hover cyber-glow-purple">
+                    <div class="text-pink-500 text-4xl mb-3 font-orbitron">10</div>
+                    <h3 class="font-bold text-lg">SPOTS</h3>
+                    <p class="text-gray-400">Available at this price</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden">
+        <div class="hex-grid"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 font-orbitron tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">WHY THE HELL WOULD I DO THIS?</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="bg-black/50 backdrop-blur-md p-8 rounded-xl border border-cyan-500/20 shadow-xl card-hover cyber-glow">
+                    <h3 class="text-2xl font-bold mb-4 text-cyan-400 font-orbitron">I DON'T REALLY KNOW.</h3>
+                    <p class="text-lg text-gray-300 mb-6">Let's be real - most web developers take weeks to deliver a basic site and charge thousands. I'm out to prove that with the right skills and absolute focus, we can create something amazing in record time.</p>
+                    <p class="text-lg text-gray-300">This isn't some template bullshit. This is custom-built, from-scratch, exactly-what-you-want web development at ludicrous speed.</p>
+                </div>
+                <div class="bg-black/50 backdrop-blur-md p-8 rounded-xl border border-pink-500/20 shadow-xl card-hover cyber-glow-purple">
+                    <h3 class="text-2xl font-bold mb-4 text-pink-500 font-orbitron">TRANSPARENCY FTW</h3>
+                    <p class="text-lg text-gray-300 mb-6">You can watch me work the entire time via screenshare if you want. No secrets, no bullshit. Either I deliver in 60 minutes or you get your money back - no excuses.</p>
+                    <p class="text-lg text-gray-300">Earthquake? Burglary? My laptop explodes? Doesn't matter - you still get your site for free.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- The Offer Section -->
+    <section id="offer" class="py-20 px-4 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
+        <div class="hex-grid"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 font-orbitron tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">WHAT YOU'RE GETTING</h2>
+            <p class="text-xl text-center text-gray-400 mb-12 max-w-3xl mx-auto">All this delivered in 60 minutes or you pay absolutely nothing</p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-black/50 backdrop-blur-md p-8 rounded-xl border border-cyan-500/20 shadow-lg card-hover cyber-glow">
+                    <div class="text-cyan-400 text-4xl mb-4"><i class="fas fa-desktop"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-cyan-400 font-orbitron">CUSTOM WEBSITE</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start"><i class="fas fa-check text-pink-500 mt-1 mr-2"></i> <span>Single-page infinite scroll</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-pink-500 mt-1 mr-2"></i> <span>Ultra-modern design</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-pink-500 mt-1 mr-2"></i> <span>Smooth-scroll navigation</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-pink-500 mt-1 mr-2"></i> <span>Mobile responsive</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-pink-500 mt-1 mr-2"></i> <span>Your choice of tech stack</span></li>
+                    </ul>
+                </div>
+                
+                <div class="bg-black/50 backdrop-blur-md p-8 rounded-xl border border-pink-500/20 shadow-lg card-hover cyber-glow-purple">
+                    <div class="text-pink-500 text-4xl mb-4"><i class="fas fa-magic"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-pink-500 font-orbitron">PREMIUM FEATURES</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start"><i class="fas fa-check text-cyan-400 mt-1 mr-2"></i> <span>Custom animations</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-cyan-400 mt-1 mr-2"></i> <span>Interactive elements</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-cyan-400 mt-1 mr-2"></i> <span>Mouse-follow effects</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-cyan-400 mt-1 mr-2"></i> <span>3D backgrounds</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-cyan-400 mt-1 mr-2"></i> <span>Custom cursors</span></li>
+                    </ul>
+                </div>
+                
+                <div class="bg-black/50 backdrop-blur-md p-8 rounded-xl border border-cyan-500/20 shadow-lg card-hover cyber-glow">
+                    <div class="text-cyan-400 text-4xl mb-4"><i class="fas fa-gift"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-cyan-400 font-orbitron">BONUS FREEBIES</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start"><i class="fas fa-check text-xl text-pink-500 mt-1 mr-2"></i> <span><strong>30 (THIRTY!) high-res logos</strong></span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-pink-500 mt-1 mr-2"></i> <span>Website banners</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-pink-500 mt-1 mr-2"></i> <span>App icons</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-pink-500 mt-1 mr-2"></i> <span>Color scheme guide</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-pink-500 mt-1 mr-2"></i> <span>Deployment instructions</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-16 p-8 rounded-xl max-w-4xl mx-auto overflow-hidden relative bg-gradient-to-r from-cyan-900/50 to-pink-900/50 border border-cyan-500/30 cyber-glow">
+                <div class="absolute inset-0">
+                    <div class="absolute inset-0" style="
+                        background-image: 
+                            linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+                        background-size: 30px 30px;
+                        animation: grid-scroll 20s linear infinite;
+                    "></div>
+                    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,242,255,0.1)_0%,transparent_70%)] animate-pulse" style="animation-duration: 4s;"></div>
+                </div>
+                <style>
+                    @keyframes grid-scroll {
+                        0% { background-position: 0 0; }
+                        100% { background-position: 30px 30px; }
+                    }
+                </style>
+                <div class="relative z-10 text-white">
+                    <h3 class="text-4xl font-bold mb-6 tracking-wider text-center font-orbitron text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500"> LIMITED TIME OFFER </h3>
+                    <div class="space-y-4 text-xl">
+                        <p class="font-semibold flex items-center"><i class="fas fa-bolt text-cyan-400 mr-3"></i> First 10 people: <span class="font-bold text-cyan-400 ml-2">JUST $499</span> </p>
+                        <p class="font-semibold flex items-center"><i class="fas fa-clock text-pink-500 mr-3"></i> After that: <span class="font-bold text-pink-500 ml-1">$999</span> --still a steal!</p>
+                        <p class="font-semibold flex items-center"><i class="fas fa-camera text-cyan-400 mr-3"></i> Bonus: Headshots/product photos delivered in <span class="font-bold text-pink-500 ml-2">24 hours</span> </p>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                @keyframes gradient-scroll {
+                    0% { background-position: 0% 50%; }
+                    100% { background-position: 100% 50%; }
+                }
+                .animate-gradient-scroll {
+                    background-size: 200% 200%;
+                    animation: gradient-scroll 3s linear infinite;
+                }
+            </style>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="py-20 px-4 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden">
+        <div class="hex-grid"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 font-orbitron tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">HOW THIS WORKS</h2>
+            <p class="text-xl text-center text-gray-400 mb-12 max-w-3xl mx-auto">The fastest web development process you'll ever experience</p>
+            
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="bg-black/50 backdrop-blur-md p-6 rounded-xl border border-cyan-500/20 shadow-md card-hover cyber-glow">
+                    <div class="text-cyan-400 text-4xl mb-3 font-orbitron">1</div>
+                    <h3 class="font-bold mb-2">BOOK YOUR SLOT</h3>
+                    <p class="text-gray-400">Pick a time that works for you</p>
+                </div>
+                <div class="bg-black/50 backdrop-blur-md p-6 rounded-xl border border-pink-500/20 shadow-md card-hover cyber-glow-purple">
+                    <div class="text-pink-500 text-4xl mb-3 font-orbitron">2</div>
+                    <h3 class="font-bold mb-2">PRE-CALL PREP</h3>
+                    <p class="text-gray-400">Send me your requirements</p>
+                </div>
+                <div class="bg-black/50 backdrop-blur-md p-6 rounded-xl border border-cyan-500/20 shadow-md card-hover cyber-glow">
+                    <div class="text-cyan-400 text-4xl mb-3 font-orbitron">3</div>
+                    <h3 class="font-bold mb-2">60-MINUTE BUILD</h3>
+                    <p class="text-gray-400">Watch me build your site live</p>
+                </div>
+                <div class="bg-black/50 backdrop-blur-md p-6 rounded-xl border border-pink-500/20 shadow-md card-hover cyber-glow-purple">
+                    <div class="text-pink-500 text-4xl mb-3 font-orbitron">4</div>
+                    <h3 class="font-bold mb-2">LAUNCH!</h3>
+                    <p class="text-gray-400">Your site goes live immediately</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="tech" class="py-20 px-4 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
+        <div class="hex-grid"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 font-orbitron tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">USE WHATEVER TECH YOU WANT</h2>
+            <p class="text-xl text-center text-gray-400 mb-12 max-w-3xl mx-auto">I don't care what stack we use - pick your poison or let me recommend</p>
+            
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-8">
+                <div class="flex flex-col items-center">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="tech-icon w-16 h-16 mb-2" alt="HTML5">
+                    <span class="text-sm text-gray-300">HTML5</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="tech-icon w-16 h-16 mb-2" alt="CSS3">
+                    <span class="text-sm text-gray-300">CSS3</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="tech-icon w-16 h-16 mb-2" alt="JavaScript">
+                    <span class="text-sm text-gray-300">JavaScript</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" class="tech-icon w-16 h-16 mb-2" alt="Tailwind">
+                    <span class="text-sm text-gray-300">Tailwind</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="tech-icon w-16 h-16 mb-2" alt="React">
+                    <span class="text-sm text-gray-300">React</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" class="tech-icon w-16 h-16 mb-2" alt="Next.js">
+                    <span class="text-sm text-gray-300">Next.js</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-black relative overflow-hidden">
+        <div class="hex-grid"></div>
+        <div class="max-w-2xl mx-auto relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 font-orbitron tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">GET IN TOUCH</h2>
+            <p class="text-center mb-8 relative text-gray-300">Call me at 
+                <span class="font-bold relative inline-flex items-center text-cyan-400">(252) 524-2423
+                    <span class="phone-icon ml-2 w-6 h-6 bg-cyan-500 rounded-full flex items-center justify-center cursor-pointer transition-all hover:scale-110 hover:shadow-lg hover:shadow-cyan-500/30">
+                        <i class="fas fa-phone text-xs text-black"></i>
+                    </span>
+                </span> or 
+                <span class="font-bold relative inline-flex items-center text-pink-500">2525-AI-CHAD
+                    <span class="phone-icon ml-2 w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center cursor-pointer transition-all hover:scale-110 hover:shadow-lg hover:shadow-pink-500/30">
+                        <i class="fas fa-phone text-xs text-black"></i>
+                    </span>
+                </span>
+            </p>
+            
+            <form id="contactForm" class="space-y-6 bg-black/50 backdrop-blur-md p-8 rounded-xl border border-cyan-500/20 shadow-xl cyber-glow">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-300 mb-1 font-orbitron">NAME</label>
+                    <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 rounded-md focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 text-white placeholder-gray-500">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-300 mb-1 font-orbitron">EMAIL</label>
+                    <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 rounded-md focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 text-white placeholder-gray-500">
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-300 mb-1 font-orbitron">MESSAGE</label>
+                    <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 rounded-md focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 text-white placeholder-gray-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-pink-500 hover:from-cyan-600 hover:to-pink-600 text-black font-bold py-3 px-4 rounded-md transition-all duration-300 overflow-hidden relative group font-orbitron tracking-wider cyber-pulse">
+                    <span class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
+                    <span class="relative z-10 flex items-center justify-center gap-2">
+                        <i class="fas fa-paper-plane"></i> SEND MESSAGE
+                    </span>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Interactive Background -->
+    <div id="threejs-bg" class="fixed inset-0 -z-10"></div>
+    <div id="click-effects" class="fixed inset-0 pointer-events-none"></div>
+
+    <script>
+        // Enhanced Three.js setup with cyberpunk theme
+        const bgContainer = document.getElementById('threejs-bg');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ 
+            alpha: true,
+            antialias: true 
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        bgContainer.appendChild(renderer.domElement);
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Create cyberpunk grid
+        const gridHelper = new THREE.GridHelper(200, 100, 0x00ffff, 0x00ffff);
+        gridHelper.position.y = -5;
+        gridHelper.material.opacity = 0.1;
+        gridHelper.material.transparent = true;
+        scene.add(gridHelper);
+
+        // Create neon particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCnt = 2000;
+        const posArray = new Float32Array(particlesCnt * 3);
+        const colorsArray = new Float32Array(particlesCnt * 3);
+
+        for(let i = 0; i < particlesCnt * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 20;
+            colorsArray[i] = Math.random() > 0.5 ? Math.random() * 0.5 + 0.5 : 0; // Mostly cyan with some pink
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorsArray, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.1,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending,
+            sizeAttenuation: true
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+        camera.position.z = 15;
+
+        // Add cyberpunk lights
+        const ambientLight = new THREE.AmbientLight(0x00ffff, 0.1);
+        scene.add(ambientLight);
+
+        const pointLight1 = new THREE.PointLight(0x00ffff, 1, 50);
+        pointLight1.position.set(5, 5, 5);
+        scene.add(pointLight1);
+
+        const pointLight2 = new THREE.PointLight(0xff00ff, 1, 50);
+        pointLight2.position.set(-5, -5, -5);
+        scene.add(pointLight2);
+
+        // Custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+            
+            // Three.js reaction
+            gsap.to(particlesMesh.rotation, {
+                x: (e.clientY - window.innerHeight/2) * 0.002,
+                y: (e.clientX - window.innerWidth/2) * 0.002,
+                duration: 1.5,
+                ease: "power2.out"
+            });
+            
+            // Point lights follow mouse
+            pointLight1.position.x = (e.clientX / window.innerWidth) * 10 - 5;
+            pointLight1.position.y = -(e.clientY / window.innerHeight) * 10 + 5;
+            
+            pointLight2.position.x = -(e.clientX / window.innerWidth) * 10 + 5;
+            pointLight2.position.y = (e.clientY / window.innerHeight) * 10 - 5;
+
+            // Card hover effect
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const angleX = (y - centerY) * 0.02;
+                const angleY = (centerX - x) * 0.02;
+                
+                card.style.setProperty('--mouse-x', `${angleY}deg`);
+                card.style.setProperty('--mouse-y', `${angleX}deg`);
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            // Three.js reaction
+            gsap.to(particlesMesh.rotation, {
+                x: (e.clientY - window.innerHeight/2) * 0.01,
+                y: (e.clientX - window.innerWidth/2) * 0.01,
+                duration: 1,
+                ease: "elastic.out(1, 0.3)"
+            });
+
+            // Ripple effect
+            const ripple = document.createElement('div');
+            ripple.className = 'absolute rounded-full bg-cyan-500 opacity-70 transform -translate-x-1/2 -translate-y-1/2';
+            ripple.style.left = `${e.clientX}px`;
+            ripple.style.top = `${e.clientY}px`;
+            ripple.style.width = '10px';
+            ripple.style.height = '10px';
+            document.getElementById('click-effects').appendChild(ripple);
+
+            gsap.to(ripple, {
+                scale: 30,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.out",
+                onComplete: () => ripple.remove()
+            });
+
+            // Emit particles from click point
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'absolute rounded-full bg-pink-500';
+                particle.style.left = `${e.clientX}px`;
+                particle.style.top = `${e.clientY}px`;
+                particle.style.width = '4px';
+                particle.style.height = '4px';
+                document.getElementById('click-effects').appendChild(particle);
+
+                gsap.to(particle, {
+                    x: (Math.random() - 0.5) * 200,
+                    y: (Math.random() - 0.5) * 200,
+                    opacity: 0,
+                    duration: 1 + Math.random(),
+                    onComplete: () => particle.remove()
+                });
+            }
+        });
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Pulse light effect
+            pointLight1.intensity = 0.5 + Math.sin(Date.now() * 0.001) * 0.5;
+            pointLight2.intensity = 0.5 + Math.cos(Date.now() * 0.001) * 0.5;
+            
+            // Rotate particles
+            particlesMesh.rotation.x += 0.001;
+            particlesMesh.rotation.y += 0.001;
+            
+            renderer.render(scene, camera);
+        }
+
+        // Start animations
+        animate();
+
+        // Mobile menu toggle
+        document.getElementById('menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Phone icon click handlers
+        document.querySelectorAll('.phone-icon').forEach(icon => {
+            icon.addEventListener('click', function() {
+                this.classList.add('animate-ping');
+                setTimeout(() => {
+                    this.classList.remove('animate-ping');
+                }, 500);
+                
+                // Copy phone number to clipboard
+                const phoneNumber = this.parentElement.textContent.trim();
+                navigator.clipboard.writeText(phoneNumber).then(() => {
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded whitespace-nowrap border border-cyan-500/30';
+                    tooltip.textContent = 'Copied to clipboard!';
+                    this.appendChild(tooltip);
+                    setTimeout(() => tooltip.remove(), 2000);
+                });
+            });
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            try {
+                // Email submission
+                await fetch('https://formspree.io/f/chad@acceptbl.com', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                // Show success message
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> MESSAGE SENT!';
+                submitBtn.classList.remove('bg-gradient-to-r', 'from-cyan-500', 'to-pink-500');
+                submitBtn.classList.add('bg-green-500');
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> SEND MESSAGE';
+                    submitBtn.classList.remove('bg-green-500');
+                    submitBtn.classList.add('bg-gradient-to-r', 'from-cyan-500', 'to-pink-500');
+                }, 3000);
+                
+                e.target.reset();
+            } catch (error) {
+                alert('Error sending message. Please try again or call me directly.');
+            }
+        });
+
+        // Gigachad text animation
+        const gigachadText = document.getElementById('gigachad-text');
+        setInterval(() => {
+            gigachadText.style.animation = 'none';
+            gigachadText.offsetHeight; // Trigger reflow
+            gigachadText.style.animation = 'gigachad-entry 5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite';
+        }, 5000);
+    </script>
+</body>
+</html>
