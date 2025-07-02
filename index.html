@@ -4,6 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>60-Min Websites. OR IT'S F***ING FREE.</title>
+    <!-- Read the Formbutton docs at formspree.io/formbutton/docs. See more examples at codepen.io/formspree -->
+<script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+<script>
+  /* paste this line in verbatim */
+  window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
+  /* customize formbutton below*/     
+  formbutton("create", {
+    action: "https://formspree.io/f/mqabjkld",
+    title: "How can we help?",
+    fields: [
+      { 
+        type: "email", 
+        label: "Email:", 
+        name: "email",
+        required: true,
+        placeholder: "your@email.com"
+      },
+      {
+        type: "textarea",
+        label: "Message:",
+        name: "message",
+        placeholder: "What's on your mind?",
+      },
+      { type: "submit" }      
+    ],
+    styles: {
+      title: {
+        backgroundColor: "red"
+      },
+      button: {
+        backgroundColor: "royalblue"
+      }
+    }
+  });
+</script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -284,16 +319,16 @@
                 <div class="relative max-w-5xl mx-auto mt-12" style="z-index: 10;">
                     <!-- Floating tech badges -->
                     <div class="absolute -top-20 left-0 right-0 flex justify-center gap-6" style="z-index: 5;">
-                        <div class="bg-black/80 backdrop-blur-sm px-4 py-2 rounded-full border border-cyan-400/30 text-sm font-bold text-cyan-400 animate-float cyber-glow" style="animation-delay: 0s">CUSTOM CODED</div>
-                        <div class="bg-black/80 backdrop-blur-sm px-4 py-2 rounded-full border border-pink-500/30 text-sm font-bold text-pink-500 animate-float cyber-glow-purple" style="animation-delay: 1s">NO TEMPLATES</div>
-                        <div class="bg-black/80 backdrop-blur-sm px-4 py-2 rounded-full border border-cyan-400/30 text-sm font-bold text-cyan-400 animate-float cyber-glow" style="animation-delay: 2s">ULTRA MODERN</div>
+                        <div class="bg-black/80 backdrop-blur-sm px-4 py-2 rounded-full border border-cyan-400/30 text-sm font-bold text-cyan-400 animate-float cyber-glow" style="animation-delay: 0.25s">CUSTOM CODED</div>
+                        <div class="bg-black/80 backdrop-blur-sm px-4 py-2 rounded-full border border-pink-500/30 text-sm font-bold text-pink-500 animate-float cyber-glow-purple" style="animation-delay: 0.50s">NO TEMPLATES</div>
+                        <div class="bg-black/80 backdrop-blur-sm px-4 py-2 rounded-full border border-cyan-400/30 text-sm font-bold text-cyan-400 animate-float cyber-glow" style="animation-delay: 0.75s">ULTRA MODERN</div>
                     </div>
                     <!-- Main content block -->
                     <div class="bg-black/50 backdrop-blur-md p-8 rounded-xl border border-cyan-500/20 shadow-xl relative z-10 cyber-glow">
                         <div class="text-center space-y-6">
                             <!-- Animated heading -->
                             <h3 class="text-3xl md:text-4xl font-bold text-white font-orbitron">
-                                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500 mt-3  glitch">BREAKNECK WEB DEVELOPMENT <span class="text-white text-lg">(TYPE SH*T)</span>
+                                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-pink-600 mt-2 glitch">BREAKNECK WEB DEVELOPMENT <div class="text-white text-lg animate-float shadow-xl cyber-glow-purple" style="animation-delay: 1s">TYPE SH*T</div>
                                 <span class="block text-transparent bg-clip-text font-lemonmilk text-white">DELIVERED AT LUDICROUS SPEED</span>
                             </h3>
                             
@@ -302,7 +337,7 @@
                             </div>
                             <!-- Description with animated underline -->
                             <p class="text-3xl text-gray-300 relative block group">
-                                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500 mt-4 animate-pulse"><b><span class="inline-flex items-center gap-4 bg-gradient-to-r from-cyan-600 to-red-900 text-white px-4 py-2 rounded-full font-lemonmilk tracking-wider">UPSKILL</span>-YOUR DIGITAL PRESENCE SO IT GOT THAT</b> <strong>BUH-BUH-<span class="inline-flex items-center gap-4 bg-gradient-to-r from-cyan-600 to-red-900 text-white px-4 py-2 rounded-full font-lemonmilk tracking-wider">BOUNCE</span></strong>
+                                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500 mt-4 animate-pulse"><b><span class="inline-flex items-center gap-4 bg-gradient-to-r mb-3 from-cyan-600 to-red-900 text-white px-4 py-2 rounded-full font-lemonmilk tracking-wider">GLOW-UP</span>-YOUR DIGITAL PRESENCE SO IT BUH-BUH-</b><strong><span class="inline-flex items-center gap-4 bg-gradient-to-r from-cyan-600 to-red-900 text-white px-4 py-2 rounded-full font-lemonmilk tracking-wider">BOUNCE</span></strong>
                                 <span class="absolute bottom-0.5 left-0.5 h-0.5 bg-gradient-to-r from-cyan-400 to-pink-500 w-0 group-hover:w-full transition-all duration-500"></span>
                             </p>
                             
@@ -382,29 +417,29 @@
             
             <div class="grid md:grid-cols-2 gap-12">
                 <div class="bg-black/50 backdrop-blur-md p-8 rounded-xl border border-cyan-500/20 shadow-xl card-hover cyber-glow">
-                    <h3 class="text-2xl font-bold mb-4 text-cyan-400 font-orbitron">I DON'T LIKE WHEN I GET TOLD <br>"YOU CAN'T DO THAT"</h3>
-                    <p class="text-lg text-gray-300 mb-6">My mother always tells a story of me as a toddler, toddlin' my way in the kitchen, where she had an electric stove burner on, and saw me look at it.</p>
-                    <p class="text-lg text-gray-300 mb-6"> She said "Don't touch that". I repeated "Don't touch that." she said "Right, it's very hot, it will hurt you very bad." And I siad "....so that's hot, and don't touch it?" and she said "Right"..... and then I slapped my hand down like it was a game of f*cking whack-a-mole, and we went straight to the hospital.</p>
-                    <p class="text-lg text-gray-300 mb-6">So, when I was bouncing this idea around, I was researching the cost of something like this at the general consensus was mid-range about $10,000.00. "10 f*cking GRAND?", I thought. "...Ain't nobody got ten f*cking GRAND to spend on a dope website these days, what a ripoff! That's, like, an hour of work! Tops!" So, I decided to ask AI...
-                    <p class="text-lg text-gray-300">
+                    <h3 class="text-2xl font-bold mb-1 text-cyan-400 font-orbitron">I DON'T LIKE WHEN I GET TOLD <br>"YOU CAN'T DO THAT"</h3>
+                    <p class="text-lg text-gray-300 mb-3"><span class="font-bold">A short story: </span>My folks had an electric stove growing up that <span class="font-bold">glowed <span class="text-red-600">red hot.</span></span> One day when I was toddler, my mom saw me look at it.</p>
+                    <p class="text-lg text-gray-300 mb-3"><span class="font-bold">"Don't touch it. It's hot, and will hurt you"</span> she said. <br>I looked at the stove, then at her, then I <span class="font-bold">slapped my hand down on it like it was f***ing whack-a-mole.</span></p>
+                    <p class="text-lg text-gray-300 mb-3">So when I was told this doesn't already exist because <span class="font-bold">"you can't do that"</span> and, if you did, <span class="font-bold">it would cost $10,000.00...</span> </p>
+                    <p class="text-lg text-gray-300 mb-3"><span class="font-bold">"Bullshit!"</span> I thought. <span class="font-bold">"I'll do it for WAY less!" </span>So, I researched pricing...</p>
+                    <p class="text-lg text-gray-300">...and it turns out, for this quality, and level of work, you need to hire <span class="font-bold">upscale, boujee, boutique web devs.</span> Mid-range? <span class="font-bold">$8,000.00-$10,000.00.</span> My goal was to <span class="font-bold">offer 90% savings</span>, or: $1,000.00. <span class="font-bold">Then I asked AI</span>....
                 </div>
                  <div class="bg-black/50 backdrop-blur-md p-8 rounded-xl border border-cyan-500/20 shadow-xl card-hover cyber-glow">
-                    <h3 class="text-2xl font-bold mb-4 text-pink-500 font-orbitron">AI TOLD ME IT WAS "IMPOSSIBLE"</h3>
-                    <p class="text-lg text-gray-300 mb-6">I explained this idea to the top flagship LLMs, and they told me it was "impossible", "not a wise decision" and that I should be "prepared to give away a lot of free websites". And, in true toddler-Chad form, I was like "pshhh what do robits know?! I got websites to make, bro. I know what I bring to the table!"</p>
-                    <p class="text-lg text-gray-300">...then I showed them my workflow, and timed myself, and finished in 43 minutes. To be fair, all of the models apologized and stood corrected. Then I said "you know what? ....I'm gunna throw in 30 high-res logos for free" and one's response was "You're aware that the going rate for that, from a unscale graphic designer at a boutique agency would be ~$5,000.00 for that, and this makes around 12-15k you're giving away for 500 bucks, right?" and I said "Hush, robit. Ain't nobody got 5 grand for that. It'll be FREE." and that's the end of this story.</p>
+                    <h3 class="text-2xl font-bold mb-1 text-pink-500 font-orbitron">AI TOLD ME IT WAS "IMPOSSIBLE"<br></h3>
+                    <p class="text-lg text-gray-300 mb-3">I explained my plan to all the flagship AI models. All of them told me it was <span class="font-bold">"a bad idea"</span></p>
+                    <p class="text-lg text-gray-300 mb-3">and I should be prepared to <span class="font-bold">"give 10 websites away for free".</span> <span class="font-bold"><br>"Well, shit"</span>, I thought. <span class="font-bold">"Looks like I've got some robots to <span class="text-xl font-bold">prove wrong.</span>"</p>
+                    <p class="text-lg text-gray-300 mb-3"><span class="font-bold">"Watch n'learn, mf'ers!"</span>, I said to the <span class="font-bold">robots.</span> and timed myself. <br><span class="font-bold text-3xl">43min. </span><span class="font-bold">Suck it, robots!</span> </p>
+                    <p class="text-lg text-gray-300 mb-3">That <span class="font-bold">should</span> have been enough. But then, <span class="font-bold">the toddler who slapped a stove wihin me</span> said "...and I'm giving 'em <span class="font-bold">30 custom hi-res logos</span> of <span class="font-bold">anything</span> they want. For <span class="font-bold">FREE</span>". They advised me, again, that this plan is "<span class="font-bold">not advisable</span> and is "<span class="font-bold">significantly under fair market value</span>".</p>
+                    <p class="text-lg text-gray-300 mb-3">Know what I said? <span class="font-bold text-2xl">F*CK IT</span>, Now it's <span class="font-bold">$495.00.</span><br>Keep talking. <span class="font-bold">Punk-ass robots</span>. And that brings us to today!</p>
                 </div>
             </div>
         </div>
     </section>
-    
     <!-- The Offer Section -->
     <section id="offer" class="py-20 px-4 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
         <div class="hex-grid"></div>
         <div class="max-w-7xl mx-auto relative z-10">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 font-orbitron tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">WHAT YOU'RE GETTING</h2>
-            <p class="text-xl text-center text-gray-400 mb-12 max-w-3xl mx-auto">The deal is: Website in an hour. That means from when you give me all the assets you want included in your site, and you sign the contract, and I sign the contract, the clock starts the second I receive payment, in full, of the $495.00. The logos are an extra "free bonus", and depending on complexity, might take an hour or two of back-and-forths with you, if you're not satisfied with my initial output. The guarantee "or it's free" is only if I do not make good on my "website in an hour" promise. If you want the new logos I make incorporated into the new website, that's fine, but thats a separate session we can discuss the pricing of later.</p> 
-            <p class="text-xl text-center text-gray-400 mb-12 max-w-3xl mx-auto">If I finish your logos, and website, and have more time, I will absolutely try to include those into the design, as well. However, that would be after I sent you the websigte file, to cover my own ass, but then I'll keep working on incorporating them til the hour is up. That does NOT constitute non-delivery of the guarantee.</p>
-            <p class="text-xl text-center text-gray-400 mb-12 max-w-3xl mx-auto"><b>I want to be upfront about this: This is a fucking bat-shit crazy deal</b>, so, y'know, be reasonable about shit, and I will be, too. If you do need an extra session, don't worry, I think it's pretty clear I'm the best you'll find when it comes to pricing. Why? Because I give a fuck. Not just about making money, but, y'know, about you not being overcharged, too. Because I'm not an asshole. Not about that, at least. That said, if you want to swap the logos out for something like, say, 30 business headshots of you that you don't have to pay a photographer for, check out my portfoloio on the bottom left of the page. (Click the plus). Those involve training an atual model on your likeness, so they do cost a little more, but, again, it's nothing outlandish and the value you get FAR EXCEEDS the financial expendature needed. Send me a message, we'll talk, otherwise you can expect to receive:....</p>
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-8 font-orbitron tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">WHAT YOU'RE GETTING</h2>
             
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-black/50 backdrop-blur-md p-8 rounded-xl border border-cyan-500/20 shadow-lg card-hover cyber-glow">
@@ -433,8 +468,8 @@
                 
                 <div class="bg-black/50 backdrop-blur-md p-8 rounded-xl border border-cyan-500/20 shadow-lg card-hover cyber-glow">
                     <div class="text-cyan-400 text-4xl mb-4"><i class="fas fa-gift"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-cyan-400 font-orbitron">BONUS FREEBIES</h3>
-                    <ul class="space-y-3 text-gray-300">
+                    <h3 class="text-xl font-bold mb-3 text-cyan-400 font-orbitron">BONUS FREEBIES <br><span class="text-sm">(Not part of 60min guarantee)</span></h3>
+                    <ul class="space-y-1 text-gray-300">
                         <li class="flex items-start"><i class="fas fa-check text-xl text-pink-500 mt-1 mr-2"></i> <span><strong>30 (THIRTY!) high-res logos</strong></span></li>
                         <li class="flex items-start"><i class="fas fa-check text-pink-500 mt-1 mr-2"></i> <span>Website banners</span></li>
                         <li class="flex items-start"><i class="fas fa-check text-pink-500 mt-1 mr-2"></i> <span>App icons</span></li>
@@ -443,7 +478,6 @@
                     </ul>
                 </div>
             </div>
-            
             <div class="mt-16 p-8 rounded-xl max-w-4xl mx-auto overflow-hidden relative bg-gradient-to-r from-cyan-900/50 to-pink-900/50 border border-cyan-500/30 cyber-glow">
                 <div class="absolute inset-0">
                     <div class="absolute inset-0" style="
@@ -470,7 +504,6 @@
                     </div>
                 </div>
             </div>
-
             <style>
                 @keyframes gradient-scroll {
                     0% { background-position: 0% 50%; }
@@ -483,34 +516,37 @@
             </style>
         </div>
     </section>
-
     <!-- Process Section -->
     <section id="process" class="py-20 px-4 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden">
         <div class="hex-grid"></div>
         <div class="max-w-7xl mx-auto relative z-10">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 font-orbitron tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">HOW THIS WORKS</h2>
-            <p class="text-xl text-center text-gray-400 mb-12 max-w-3xl mx-auto">The fastest web development process you'll ever experience</p>
-            
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-3 font-orbitron tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">HOW THIS WORKS</h2>
+            <p class="text-xl text-center text-gray-400 mb-3 max-w-3xl mx-auto">The fastest web development process you'll ever experience</p>
+            <p class="text-xl text-center text-gray-400 mb-3 max-w-3xl mx-auto"><span class="font-bold text-2xl">The deal is: Website in an hour, or it's free. No asterisk. No bullshit.</span></p> 
+            <p class="text-xl text-center text-gray-400 mb-3 max-w-3xl mx-auto"><span class="font-bold text-2xl">Here's how it works:</span> First, you fill out a service request, by clicking the link at the bottom of this page. I'll contact you to schedule your hour. This will actually be about 1.5 hours, as the first 30 min will be signing the contract, you sending me the assets I need (like your logos, pictures, etc), although I can usually scrape most of it ahead of time. </p>
+            <p class="text-xl text-center text-gray-400 mb-3 max-w-3xl mx-auto">We'll both sign a contract on a video call. My screen will be shared. Once you sign, and make the payment of $495.00, and I confirm receipt of your funds, live, on that video call, I will then start a countdown timer of 60 minutes on my screenshare.</p>
+            <p class="text-xl text-center text-gray-400 mb-3 max-w-3xl mx-auto">If it hits "00:00:00" and I haven't clicked "send" on an email addressed to you with the new website (a index.html file attached), then I immediately refund you the same way it was paid.</p>
+            <p class="text-xl text-center text-gray-400 mb-3 max-w-3xl mx-auto">If I deliver, as promised, and click the "send" button on the email, with your site attached. BEFORE it reaches 00:00:00, I keep the $495.00. That's it. No asterisks. No bullshit.</p>
             <div class="grid md:grid-cols-4 gap-6">
                 <div class="bg-black/50 backdrop-blur-md p-6 rounded-xl border border-cyan-500/20 shadow-md card-hover cyber-glow">
                     <div class="text-cyan-400 text-4xl mb-3 font-orbitron">1</div>
-                    <h3 class="font-bold mb-2">BOOK YOUR SLOT</h3>
-                    <p class="text-gray-400">Pick a time that works for you</p>
+                    <h3 class="font-bold mb-2">FILL OUT A REQUEST</h3>
+                    <p class="text-gray-400">Click "REQUEST SERVICE" at the bottom of this page. That'll goto a Google Forms for you to fill out. Be thorough, please! I'll contact you back ASAP.</p>
                 </div>
                 <div class="bg-black/50 backdrop-blur-md p-6 rounded-xl border border-pink-500/20 shadow-md card-hover cyber-glow-purple">
                     <div class="text-pink-500 text-4xl mb-3 font-orbitron">2</div>
-                    <h3 class="font-bold mb-2">PRE-CALL PREP</h3>
-                    <p class="text-gray-400">Send me your requirements</p>
+                    <h3 class="font-bold mb-2">VIDEO CALL, SIGN, PAY</h3>
+                    <p class="text-gray-400">We'll schedule a video call. On that call, we both sign the contract, you give me stuff you want in the site (your logo, for instance), and you pay $495.00.</p>
                 </div>
                 <div class="bg-black/50 backdrop-blur-md p-6 rounded-xl border border-cyan-500/20 shadow-md card-hover cyber-glow">
                     <div class="text-cyan-400 text-4xl mb-3 font-orbitron">3</div>
-                    <h3 class="font-bold mb-2">60-MINUTE BUILD</h3>
-                    <p class="text-gray-400">Watch me build your site live</p>
+                    <h3 class="font-bold mb-2">TIMER STARTS</h3>
+                    <p class="text-gray-400">Once I confirm receipt of payment on that call, live, with you, I put up a 01h:00m:00s timer on my screenshare, and BUILD! You can watch! Or don't! Whatever!</p>
                 </div>
                 <div class="bg-black/50 backdrop-blur-md p-6 rounded-xl border border-pink-500/20 shadow-md card-hover cyber-glow-purple">
                     <div class="text-pink-500 text-4xl mb-3 font-orbitron">4</div>
-                    <h3 class="font-bold mb-2">LAUNCH!</h3>
-                    <p class="text-gray-400">Your site goes live immediately</p>
+                    <h3 class="font-bold mb-2">YOU GET YOUR SITE!</h3>
+                    <p class="text-gray-400">BEFORE the timer hits 00h:00m:00s I will click "send" on the email with your website code attached as a stand-alone index.html file. OR IT'S F*CKING FREE.</p>
                 </div>
             </div>
         </div>
@@ -845,7 +881,7 @@
             
             try {
                 // Email submission
-                await fetch('https://formspree.io/f/chad@acceptbl.com', {
+                await fetch('https://formspree.io/f/mqabjkld', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
